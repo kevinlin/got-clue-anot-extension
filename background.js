@@ -96,10 +96,16 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     
     // Process the selected element
     processSelectedElement(message.html, sender.tab.id);
+    
+    // Send acknowledgment response
+    sendResponse({ success: true });
   } else if (message.type === 'SELECTION_STOPPED') {
     // Reset selection mode
     isSelectionMode = false;
     updateIcon(false);
+    
+    // Send acknowledgment response
+    sendResponse({ success: true });
   }
 });
 

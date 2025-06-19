@@ -108,7 +108,11 @@
     cleanupOverlays();
     
     // Notify background script (with error handling)
-    safeSendMessage({ type: 'SELECTION_STOPPED' });
+    safeSendMessage({ type: 'SELECTION_STOPPED' }, (response) => {
+      if (response && response.success) {
+        console.log('Got Clue Anot: Selection stopped successfully');
+      }
+    });
   }
   
   function handleMouseOver(event) {
@@ -152,6 +156,10 @@
     safeSendMessage({
       type: 'ELEMENT_SELECTED',
       html: html
+    }, (response) => {
+      if (response && response.success) {
+        console.log('Got Clue Anot: Element selection processed successfully');
+      }
     });
   }
   
