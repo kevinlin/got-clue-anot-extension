@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             document.getElementById('apiKey').value = result.apiKey || '';
             document.getElementById('model').value = result.model || 'gpt-4o';
-            document.getElementById('userPrompt').value = result.userPrompt || 'Please help me answer this question:';
+            document.getElementById('userPrompt').value = result.userPrompt || '';
             
             // Show welcome message if no API key is configured
             if (!result.apiKey) {
@@ -55,11 +55,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
             
-            if (!userPrompt) {
-                showStatus('Please enter a user prompt', 'error');
-                return;
-            }
-            
             // Save to storage
             await chrome.storage.local.set({
                 apiKey: apiKey,
@@ -80,7 +75,6 @@ document.addEventListener('DOMContentLoaded', function() {
     function resetToDefaults() {
         document.getElementById('apiKey').value = '';
         document.getElementById('model').value = 'gpt-4o';
-        document.getElementById('userPrompt').value = 'Please help me answer this question:';
         
         showStatus('Reset to default values. Click "Save Settings" to apply.', 'success');
     }

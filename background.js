@@ -158,7 +158,7 @@ async function getConfig() {
   return {
     apiKey: result.apiKey || '',
     model: result.model || 'gpt-4o',
-    userPrompt: result.userPrompt || 'Please help me answer this question:'
+    userPrompt: result.userPrompt || ''
   };
 }
 
