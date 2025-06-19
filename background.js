@@ -138,7 +138,7 @@ Rules
     const finalPrompt = `${systemPrompt}\n\n${userPromptSection}
 Below is the question and options:
 ${markdown}`;
-    console.log(`finalPrompt: ${finalPrompt}`);
+    // console.log(`Prompt to OpenAI: ${finalPrompt}`);
     
     // Call OpenAI API
     const response = await callOpenAI(finalPrompt, config.apiKey, config.model);
@@ -209,6 +209,7 @@ async function callOpenAI(prompt, apiKey, model) {
   }
   
   const data = await response.json();
+  // console.log(`Answer from OpenAI: ${data.choices[0].message.content}`);
   return data.choices[0].message.content;
 }
 
