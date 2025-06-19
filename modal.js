@@ -160,8 +160,19 @@
   }
   
   function formatContent(content) {
+    // Split content into lines
+    const lines = content.split('\n');
+    
+    // Format first line with bold and larger font size
+    if (lines.length > 0 && lines[0].trim()) {
+      lines[0] = `<div style="font-weight: bold; font-size: 16px; margin-bottom: 8px;">${lines[0]}</div>`;
+    }
+    
+    // Rejoin content
+    const formattedContent = lines.join('\n');
+    
     // Simple markdown-like formatting
-    return content
+    return formattedContent
       .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
       .replace(/\*(.*?)\*/g, '<em>$1</em>')
       .replace(/`(.*?)`/g, '<code style="background: rgba(0,0,0,0.1); padding: 2px 4px; border-radius: 3px; font-family: monospace;">$1</code>')
