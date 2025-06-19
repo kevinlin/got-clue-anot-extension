@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Got Clue Anot - Options</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #f9fafb;
+            color: #111827;
+            line-height: 1.6;
+        }
+        
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            margin: 0 0 30px 0;
+            font-size: 24px;
+            font-weight: 600;
+            color: #1f2937;
+            border-bottom: 2px solid #8b5cf6;
+            padding-bottom: 10px;
+        }
+        
+        .form-group {
+            margin-bottom: 24px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #374151;
+        }
+        
+        input[type="password"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: border-color 0.2s;
+            box-sizing: border-box;
+        }
+        
+        input[type="password"]:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #8b5cf6;
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+        }
+        
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .help-text {
+            font-size: 12px;
+            color: #6b7280;
+            margin-top: 4px;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 30px;
+        }
+        
+        button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .primary-button {
+            background-color: #8b5cf6;
+            color: white;
+        }
+        
+        .primary-button:hover {
+            background-color: #7c3aed;
+        }
+        
+        .secondary-button {
+            background-color: #f3f4f6;
+            color: #374151;
+            border: 1px solid #d1d5db;
+        }
+        
+        .secondary-button:hover {
+            background-color: #e5e7eb;
+        }
+        
+        .status {
+            padding: 12px;
+            border-radius: 6px;
+            margin-top: 16px;
+            font-size: 14px;
+            display: none;
+        }
+        
+        .status.success {
+            background-color: #d1fae5;
+            color: #065f46;
+            border: 1px solid #a7f3d0;
+        }
+        
+        .status.error {
+            background-color: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fca5a5;
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #111827;
+                color: #f9fafb;
+            }
+            
+            .container {
+                background: #1f2937;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+            }
+            
+            h1 {
+                color: #f9fafb;
+            }
+            
+            label {
+                color: #e5e7eb;
+            }
+            
+            input[type="password"],
+            select,
+            textarea {
+                background-color: #374151;
+                border-color: #4b5563;
+                color: #f9fafb;
+            }
+            
+            input[type="password"]:focus,
+            select:focus,
+            textarea:focus {
+                border-color: #8b5cf6;
+            }
+            
+            .help-text {
+                color: #9ca3af;
+            }
+            
+            .secondary-button {
+                background-color: #374151;
+                color: #e5e7eb;
+                border-color: #4b5563;
+            }
+            
+            .secondary-button:hover {
+                background-color: #4b5563;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Got Clue Anot? - Configuration</h1>
+        
+        <div id="welcomeMessage" class="status" style="display: none; background-color: #dbeafe; color: #1e40af; border-color: #93c5fd;">
+            <strong>Welcome to Got Clue Anot!</strong> Please configure your OpenAI API key and settings below to get started.
+        </div>
+        
+        <form id="optionsForm">
+            <div class="form-group">
+                <label for="apiKey">OpenAI API Key</label>
+                <input type="password" id="apiKey" name="apiKey" placeholder="sk-...">
+                <div class="help-text">
+                    Your API key is stored locally and never shared. Get one from 
+                    <a href="https://platform.openai.com/api-keys" target="_blank" style="color: #8b5cf6;">OpenAI Platform</a>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="model">OpenAI Model</label>
+                <select id="model" name="model">
+                    <option value="gpt-4o">GPT-4o</option>
+                    <option value="gpt-4.1">GPT-4.1</option>
+                    <option value="gpt-4.1-mini">GPT-4.1 Mini</option>
+                    <option value="o3-pro">O3 Pro</option>
+                    <option value="o3">O3</option>
+                    <option value="o4-mini">O4 Mini</option>
+                </select>
+                <div class="help-text">
+                    Select the OpenAI model to use for answering questions. GPT-4o is recommended for best results.
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="userPrompt">Custom User Prompt</label>
+                <textarea id="userPrompt" name="userPrompt" placeholder="Please help me answer this question:"></textarea>
+                <div class="help-text">
+                    This prompt will be added before the selected content when sending to OpenAI. The system will automatically add instructions for answering multiple choice questions.
+                </div>
+            </div>
+            
+            <div class="button-group">
+                <button type="submit" class="primary-button">Save Settings</button>
+                <button type="button" id="resetButton" class="secondary-button">Reset to Defaults</button>
+            </div>
+            
+            <div id="status" class="status"></div>
+        </form>
+    </div>
+    
+    <script src="options.js"></script>
+</body>
+</html> 

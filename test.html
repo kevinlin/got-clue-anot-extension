@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Page - Got Clue Anot Extension</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #f9fafb;
+            color: #333;
+        }
+        
+        .question {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-left: 4px solid #8b5cf6;
+        }
+        
+        .question h3 {
+            margin-top: 0;
+            color: #1f2937;
+        }
+        
+        .choices {
+            margin: 15px 0;
+        }
+        
+        .choice {
+            padding: 8px 0;
+            margin: 5px 0;
+        }
+        
+        .choice input {
+            margin-right: 10px;
+        }
+        
+        .math-question {
+            background-color: #fef3c7;
+            border-left-color: #f59e0b;
+        }
+        
+        .science-question {
+            background-color: #dbeafe;
+            border-left-color: #3b82f6;
+        }
+        
+        .note {
+            background-color: #fef2f2;
+            border: 1px solid #fecaca;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+        
+        code {
+            background-color: #f3f4f6;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <h1>Test Page for Got Clue Anot Extension</h1>
+    
+    <div class="note">
+        <strong>Instructions:</strong> Install the "Got Clue Anot?" Chrome extension, configure your OpenAI API key, then click the bulb icon in the toolbar and select any question below to test the functionality.
+    </div>
+    
+    <div class="question">
+        <h3>Question 1: JavaScript Fundamentals</h3>
+        <p>What is the output of the following JavaScript code?</p>
+        <pre><code>console.log(typeof null);</code></pre>
+        
+        <div class="choices">
+            <div class="choice">
+                <input type="radio" name="q1" value="a" id="q1a">
+                <label for="q1a">A) "null"</label>
+            </div>
+            <div class="choice">
+                <input type="radio" name="q1" value="b" id="q1b">
+                <label for="q1b">B) "undefined"</label>
+            </div>
+            <div class="choice">
+                <input type="radio" name="q1" value="c" id="q1c">
+                <label for="q1c">C) "object"</label>
+            </div>
+            <div class="choice">
+                <input type="radio" name="q1" value="d" id="q1d">
+                <label for="q1d">D) "number"</label>
+            </div>
+        </div>
+    </div>
+    
+    <div class="question math-question">
+        <h3>Question 2: Mathematics</h3>
+        <p>If f(x) = 2x² + 3x - 1, what is f(2)?</p>
+        
+        <div class="choices">
+            <div class="choice">
+                <input type="radio" name="q2" value="a" id="q2a">
+                <label for="q2a">A) 9</label>
+            </div>
+            <div class="choice">
+                <input type="radio" name="q2" value="b" id="q2b">
+                <label for="q2b">B) 11</label>
+            </div>
+            <div class="choice">
+                <input type="radio" name="q2" value="c" id="q2c">
+                <label for="q2c">C) 13</label>
+            </div>
+            <div class="choice">
+                <input type="radio" name="q2" value="d" id="q2d">
+                <label for="q2d">D) 15</label>
+            </div>
+        </div>
+    </div>
+    
+    <div class="question science-question">
+        <h3>Question 3: Chemistry</h3>
+        <p>What is the chemical formula for water?</p>
+        
+        <div class="choices">
+            <div class="choice">
+                <input type="radio" name="q3" value="a" id="q3a">
+                <label for="q3a">A) H₂O₂</label>
+            </div>
+            <div class="choice">
+                <input type="radio" name="q3" value="b" id="q3b">
+                <label for="q3b">B) H₂O</label>
+            </div>
+            <div class="choice">
+                <input type="radio" name="q3" value="c" id="q3c">
+                <label for="q3c">C) HO₂</label>
+            </div>
+            <div class="choice">
+                <input type="radio" name="q3" value="d" id="q3d">
+                <label for="q3d">D) H₃O</label>
+            </div>
+        </div>
+    </div>
+    
+    <div class="question">
+        <h3>Question 4: General Knowledge</h3>
+        <p>Which planet is known as the "Red Planet"?</p>
+        
+        <div class="choices">
+            <div class="choice">
+                <input type="radio" name="q4" value="a" id="q4a">
+                <label for="q4a">A) Venus</label>
+            </div>
+            <div class="choice">
+                <input type="radio" name="q4" value="b" id="q4b">
+                <label for="q4b">B) Mars</label>
+            </div>
+            <div class="choice">
+                <input type="radio" name="q4" value="c" id="q4c">
+                <label for="q4c">C) Jupiter</label>
+            </div>
+            <div class="choice">
+                <input type="radio" name="q4" value="d" id="q4d">
+                <label for="q4d">D) Saturn</label>
+            </div>
+        </div>
+    </div>
+    
+    <div class="question">
+        <h3>Question 5: Complex Problem</h3>
+        <p>A car travels 60 km in the first hour, 80 km in the second hour, and 40 km in the third hour. What is the average speed of the car for the entire journey?</p>
+        
+        <div class="choices">
+            <div class="choice">
+                <input type="radio" name="q5" value="a" id="q5a">
+                <label for="q5a">A) 50 km/h</label>
+            </div>
+            <div class="choice">
+                <input type="radio" name="q5" value="b" id="q5b">
+                <label for="q5b">B) 60 km/h</label>
+            </div>
+            <div class="choice">
+                <input type="radio" name="q5" value="c" id="q5c">
+                <label for="q5c">C) 70 km/h</label>
+            </div>
+            <div class="choice">
+                <input type="radio" name="q5" value="d" id="q5d">
+                <label for="q5d">D) 80 km/h</label>
+            </div>
+        </div>
+    </div>
+    
+    <div class="note">
+        <p><strong>Expected Answers:</strong></p>
+        <ul>
+            <li>Question 1: C) "object" (JavaScript quirk)</li>
+            <li>Question 2: C) 13 (f(2) = 2(4) + 3(2) - 1 = 8 + 6 - 1 = 13)</li>
+            <li>Question 3: B) H₂O</li>
+            <li>Question 4: B) Mars</li>
+            <li>Question 5: B) 60 km/h (180 km ÷ 3 hours)</li>
+        </ul>
+    </div>
+</body>
+</html> 
