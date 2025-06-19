@@ -30,17 +30,17 @@
     document.body.appendChild(modal);
     currentModal = modal;
     
-    // Auto-dismiss after 5 seconds if not an error
+    // Auto-dismiss after 10 seconds if not an error
     if (!isError) {
       autoCloseTimer = setTimeout(() => {
         closeModal();
-      }, 5000);
+      }, 10000);
     }
     
     // Animate in
     requestAnimationFrame(() => {
       modal.style.opacity = '1';
-      modal.style.transform = 'translate(-50%, -50%) scale(1)';
+      modal.style.transform = 'scale(1)';
     });
   }
   
@@ -53,9 +53,9 @@
     
     modal.style.cssText = `
       position: fixed !important;
-      top: 50% !important;
-      left: 50% !important;
-      transform: translate(-50%, -50%) scale(0.9) !important;
+      top: 20px !important;
+      right: 20px !important;
+      transform: scale(0.9) !important;
       background: ${isDarkMode ? '#1f2937' : '#ffffff'} !important;
       color: ${isDarkMode ? '#f9fafb' : '#111827'} !important;
       border: 1px solid ${isDarkMode ? '#374151' : '#e5e7eb'} !important;
@@ -85,13 +85,31 @@
     `;
     
     const titleElement = document.createElement('h3');
-    titleElement.textContent = title;
     titleElement.style.cssText = `
       margin: 0 !important;
       font-size: 16px !important;
       font-weight: 600 !important;
       color: ${isError ? '#ef4444' : (isDarkMode ? '#f9fafb' : '#111827')} !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 8px !important;
     `;
+    
+    // Create icon element
+    const iconElement = document.createElement('img');
+    iconElement.src = chrome.runtime.getURL('icons/bulb-128.png');
+    iconElement.style.cssText = `
+      width: 20px !important;
+      height: 20px !important;
+      object-fit: contain !important;
+    `;
+    
+    // Create title text
+    const titleText = document.createElement('span');
+    titleText.textContent = title;
+    
+    titleElement.appendChild(iconElement);
+    titleElement.appendChild(titleText);
     
     const closeButton = document.createElement('button');
     closeButton.innerHTML = '×';
@@ -159,7 +177,7 @@
       
       // Animate out
       currentModal.style.opacity = '0';
-      currentModal.style.transform = 'translate(-50%, -50%) scale(0.9)';
+      currentModal.style.transform = 'scale(0.9)';
       
       setTimeout(() => {
         if (currentModal && currentModal.parentNode) {

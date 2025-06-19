@@ -34,7 +34,7 @@
   },
   "web_accessible_resources": [
     {
-      "resources": ["modal.js", "utils/markdown.js"],
+      "resources": ["modal.js", "utils/markdown.js", "icons/bulb-128.png"],
       "matches": ["<all_urls>"]
     }
   ]
