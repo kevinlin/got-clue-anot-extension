@@ -43,6 +43,13 @@ chrome.action.onClicked.addListener(async (tab) => {
     
     // Inject content script and start selection if entering selection mode
     if (isSelectionMode) {
+      // First inject the content script
+      await chrome.scripting.executeScript({
+        target: { tabId: tab.id },
+        files: ['content.js']
+      });
+      
+      // Then start selection
       await chrome.scripting.executeScript({
         target: { tabId: tab.id },
         function: startSelection
@@ -144,7 +151,7 @@ Rules
     const finalPrompt = `${systemPrompt}\n\n${userPromptSection}
 Below is the question and options:
 ${markdown}`;
-    // console.log(`Prompt to OpenAI: ${finalPrompt}`);
+    console.log(`Prompt to OpenAI: ${finalPrompt}`);
     
     // Call OpenAI API
     const response = await callOpenAI(finalPrompt, config.apiKey, config.model);
@@ -215,7 +222,7 @@ async function callOpenAI(prompt, apiKey, model) {
   }
   
   const data = await response.json();
-  // console.log(`Answer from OpenAI: ${data.choices[0].message.content}`);
+  console.log(`Answer from OpenAI: ${data.choices[0].message.content}`);
   return data.choices[0].message.content;
 }
 

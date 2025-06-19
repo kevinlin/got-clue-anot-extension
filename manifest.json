@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Got Clue Anot?",
   "version": "1.0.0",
-  "description": "Help users answer MCQ-type questions from online exams/quizzes by selecting a section of the page and querying OpenAI's LLM for hints/answers.",
+  "description": "Help users answer questions from online quizzes by selecting a section of the page and querying LLM for answers.",
   "permissions": [
     "activeTab",
     "storage",
@@ -11,12 +11,6 @@
   "background": {
     "service_worker": "background.js"
   },
-  "content_scripts": [
-    {
-      "matches": ["<all_urls>"],
-      "js": ["content.js"]
-    }
-  ],
   "action": {
     "default_icon": {
       "16": "icons/bulb-16.png",
@@ -34,7 +28,7 @@
   },
   "web_accessible_resources": [
     {
-      "resources": ["modal.js", "utils/markdown.js", "icons/bulb-128.png"],
+      "resources": ["icons/bulb-128.png"],
       "matches": ["<all_urls>"]
     }
   ]
