@@ -53,15 +53,6 @@ The extension includes bulb icons in multiple sizes (16x16, 32x32, 48x48, 128x12
 4. **View the Answer**: A modal will appear with the AI's response after processing
 5. **Continue**: The selection mode automatically deactivates after each selection
 
-## Supported Models
-
-- **GPT-4o** (recommended)
-- **GPT-4.1**
-- **GPT-4.1 Mini**
-- **O3 Pro**
-- **O3**
-- **O4 Mini**
-
 ## Privacy & Security
 
 - Your API key is stored locally in your browser using `chrome.storage.local`
