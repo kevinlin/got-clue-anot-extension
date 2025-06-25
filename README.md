@@ -11,7 +11,6 @@ A Chrome extension that helps users answer multiple-choice questions from online
 - **Configurable Settings**: Set your API key, choose OpenAI model, customize prompts, and configure keyboard shortcuts
 - **Auto-Dismissing Modal**: Responses appear in a modal that auto-closes after 10 seconds
 - **Dark Mode Support**: Automatically adapts to your system's dark/light mode preference
-- **Auto-Configuration**: Opens options page on install/update or when API key is missing
 
 ## Installation
 

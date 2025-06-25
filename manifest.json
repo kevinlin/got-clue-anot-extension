@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Got Clue Anot?",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Help users answer questions from online quizzes by selecting a section of the page and querying LLM for answers.",
   "permissions": [
     "activeTab",
