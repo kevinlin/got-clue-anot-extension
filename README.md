@@ -5,12 +5,12 @@ A Chrome extension that helps users answer multiple-choice questions from online
 ## Features
 
 - **Manual Element Selection**: Click the toolbar button to activate selection mode, then click any element on the page
+- **Keyboard Shortcuts**: Use configurable keyboard shortcuts to quickly trigger content capture (default: `Ctrl+Shift+Q`)
 - **Visual Feedback**: Hovered elements show a dashed purple border, selected elements show a solid purple border
 - **AI-Powered Answers**: Uses OpenAI's API to analyze questions and provide answers in the format "Answer: X" with explanations
-- **Configurable Settings**: Set your API key, choose OpenAI model, and customize prompts
+- **Configurable Settings**: Set your API key, choose OpenAI model, customize prompts, and configure keyboard shortcuts
 - **Auto-Dismissing Modal**: Responses appear in a modal that auto-closes after 10 seconds
 - **Dark Mode Support**: Automatically adapts to your system's dark/light mode preference
-- **Robust Error Handling**: Extension context validation and graceful error recovery
 - **Auto-Configuration**: Opens options page on install/update or when API key is missing
 
 ## Installation
@@ -40,18 +40,36 @@ The extension includes bulb icons in multiple sizes (16x16, 32x32, 48x48, 128x12
    - Enter your OpenAI API key
    - Select your preferred model (GPT-4o recommended)
    - Customize the user prompt if desired
+   - Choose your preferred keyboard shortcut (default: `Ctrl+Shift+Q`)
    - Click "Save Settings"
 
 ## Usage
 
 1. **Navigate to a Quiz/Exam Page**: Open any webpage with multiple-choice questions
-2. **Activate Selection Mode**: Click the bulb icon in the toolbar
+
+2. **Activate Selection Mode** (choose one method):
+   - **Method 1**: Click the bulb icon in the toolbar
+   - **Method 2**: Use the keyboard shortcut (default: `Ctrl+Shift+Q` on Windows/Linux, `Cmd+Shift+Q` on Mac)
+
 3. **Select an Element**: 
    - Hover over elements to see them highlighted with a dashed border
    - Click on the question or section you want to analyze
    - The selected element will show a solid purple border briefly
+
 4. **View the Answer**: A modal will appear with the AI's response after processing
+
 5. **Continue**: The selection mode automatically deactivates after each selection
+
+### Keyboard Shortcuts
+
+- **Default Shortcut**: `Ctrl+Shift+Q` (Windows/Linux) or `Cmd+Shift+Q` (Mac)
+- **Available Options**: Choose from 8 different combinations in the extension options:
+  - `Ctrl+Shift+Q`, `Ctrl+Shift+A`, `Ctrl+Shift+S`, `Ctrl+Shift+D`
+  - `Ctrl+Alt+Q`, `Ctrl+Alt+A`
+  - `Alt+Shift+Q`, `Alt+Shift+A`
+- **Customization**: Visit the extension options page to change your preferred shortcut
+- **Chrome Shortcuts**: You can also customize shortcuts via `chrome://extensions/shortcuts`
+- **Smart Detection**: Shortcuts are ignored when typing in input fields or text areas
 
 ## Privacy & Security
 
@@ -83,10 +101,17 @@ The extension includes bulb icons in multiple sizes (16x16, 32x32, 48x48, 128x12
 - Check the browser console for specific error messages
 
 ### Selection Mode Issues
-- Make sure you click the bulb icon to activate selection mode
+- Make sure you click the bulb icon or use the keyboard shortcut to activate selection mode
 - The cursor should change to a crosshair when selection mode is active
-- Try clicking the icon again to toggle selection mode
+- Try clicking the icon again or pressing the keyboard shortcut to toggle selection mode
 - Check that the page allows script injection
+
+### Keyboard Shortcut Issues
+- Ensure you're not typing in an input field when using the shortcut
+- Check that your chosen shortcut doesn't conflict with browser or system shortcuts
+- Try using the default shortcut (`Ctrl+Shift+Q`) if custom shortcuts aren't working
+- Visit `chrome://extensions/shortcuts` to verify the extension's keyboard shortcuts
+- Restart your browser after changing keyboard shortcuts in the options
 
 ## Development
 
@@ -114,10 +139,12 @@ got-clue-anot-extension/
 - **Content Script**: 
   - Handles element selection with visual feedback overlays
   - Provides crosshair cursor during selection mode
+  - Keyboard shortcut detection and parsing
   - Robust event handling with context validation
 - **Background Script**: 
   - Manages OpenAI API calls with proper error handling
   - Handles configuration management
+  - Chrome commands API integration for keyboard shortcuts
   - Coordinates between content script and options
 - **Modal System**: 
   - Non-blocking overlay for displaying responses
@@ -127,6 +154,7 @@ got-clue-anot-extension/
 - **Options Page**: 
   - Clean, modern UI with dark mode support
   - Form validation and user feedback
+  - Keyboard shortcut configuration interface
   - Welcome message for new users
 
 ### Technical Features
@@ -134,6 +162,8 @@ got-clue-anot-extension/
 - **HTML to Text Conversion**: Simplified conversion that extracts clean text from selected HTML
 - **System Prompt**: Built-in prompt engineering for consistent answer formatting
 - **User Prompt Integration**: Optional custom prompts that integrate with system instructions
+- **Keyboard Shortcut System**: Dual implementation using Chrome Commands API and custom event handling
+- **Cross-Platform Compatibility**: Automatic Ctrl/Cmd key mapping for Windows/Linux/Mac
 - **Extension Context Validation**: Prevents errors during extension updates/reloads
 - **Graceful Error Handling**: User-friendly error messages and recovery
 - **Auto-Configuration Flow**: Guides users through setup process
