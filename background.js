@@ -25,13 +25,32 @@ chrome.runtime.onStartup.addListener(async () => {
 
 // Handle toolbar button click
 chrome.action.onClicked.addListener(async (tab) => {
+  await toggleSelectionMode(tab);
+});
+
+// Handle keyboard command
+chrome.commands.onCommand.addListener(async (command) => {
+  if (command === 'trigger-capture') {
+    try {
+      // Get current active tab
+      const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+      if (tab) {
+        await toggleSelectionMode(tab);
+      }
+    } catch (error) {
+      console.error('Error handling keyboard command:', error);
+    }
+  }
+});
+
+// Common function to toggle selection mode
+async function toggleSelectionMode(tab) {
   try {
     // Check if extension is configured
     const config = await getConfig();
     if (!config.apiKey) {
       // Open options page if not configured
       chrome.runtime.openOptionsPage();
-
       return;
     }
     
@@ -61,9 +80,9 @@ chrome.action.onClicked.addListener(async (tab) => {
       });
     }
   } catch (error) {
-    console.error('Error handling action click:', error);
+    console.error('Error toggling selection mode:', error);
   }
-});
+}
 
 // Update extension icon based on selection mode
 async function updateIcon(active) {
@@ -167,11 +186,12 @@ ${markdown}`;
 
 // Get user configuration from storage
 async function getConfig() {
-  const result = await chrome.storage.local.get(['apiKey', 'model', 'userPrompt']);
+  const result = await chrome.storage.local.get(['apiKey', 'model', 'userPrompt', 'keyboardShortcut']);
   return {
     apiKey: result.apiKey || '',
     model: result.model || 'gpt-4o',
-    userPrompt: result.userPrompt || ''
+    userPrompt: result.userPrompt || '',
+    keyboardShortcut: result.keyboardShortcut || 'Ctrl+Shift+Q'
   };
 }
 
