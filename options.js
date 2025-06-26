@@ -22,12 +22,11 @@ document.addEventListener('DOMContentLoaded', function() {
     
     async function loadOptions() {
         try {
-            const result = await chrome.storage.local.get(['apiKey', 'model', 'userPrompt', 'keyboardShortcut']);
+            const result = await chrome.storage.local.get(['apiKey', 'model', 'userPrompt']);
             
             document.getElementById('apiKey').value = result.apiKey || '';
             document.getElementById('model').value = result.model || 'gpt-4o';
             document.getElementById('userPrompt').value = result.userPrompt || '';
-            document.getElementById('keyboardShortcut').value = result.keyboardShortcut || 'Ctrl+Shift+Q';
             
             // Show welcome message if no API key is configured
             if (!result.apiKey) {
@@ -44,7 +43,6 @@ document.addEventListener('DOMContentLoaded', function() {
             const apiKey = document.getElementById('apiKey').value.trim();
             const model = document.getElementById('model').value;
             const userPrompt = document.getElementById('userPrompt').value.trim();
-            const keyboardShortcut = document.getElementById('keyboardShortcut').value;
             
             // Basic validation
             if (!apiKey) {
@@ -61,14 +59,10 @@ document.addEventListener('DOMContentLoaded', function() {
             await chrome.storage.local.set({
                 apiKey: apiKey,
                 model: model,
-                userPrompt: userPrompt,
-                keyboardShortcut: keyboardShortcut
+                userPrompt: userPrompt
             });
             
-            // Try to update the keyboard shortcut
-            await updateKeyboardShortcut(keyboardShortcut);
-            
-            showStatus('Settings saved successfully! You may need to restart your browser for keyboard shortcut changes to take effect.', 'success');
+            showStatus('Settings saved successfully!', 'success');
             
             // Hide welcome message after successful save
             welcomeMessage.style.display = 'none';
@@ -82,21 +76,8 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('apiKey').value = '';
         document.getElementById('model').value = 'gpt-4o';
         document.getElementById('userPrompt').value = '';
-        document.getElementById('keyboardShortcut').value = 'Ctrl+Shift+Q';
         
         showStatus('Reset to default values. Click "Save Settings" to apply.', 'success');
-    }
-    
-    // Function to update keyboard shortcut (note: Chrome extensions have limitations here)
-    async function updateKeyboardShortcut(shortcut) {
-        try {
-            // Note: Chrome extensions cannot programmatically update keyboard shortcuts
-            // The user would need to manually update them in chrome://extensions/shortcuts
-            // We'll store the preference and show a helpful message
-            console.log('Keyboard shortcut preference saved:', shortcut);
-        } catch (error) {
-            console.error('Error updating keyboard shortcut:', error);
-        }
     }
     
     function showStatus(message, type) {

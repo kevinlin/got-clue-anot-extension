@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Got Clue Anot?",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Help users answer questions from online quizzes by selecting a section of the page and querying LLM for answers.",
   "permissions": [
     "activeTab",
@@ -11,8 +11,8 @@
   "commands": {
     "trigger-capture": {
       "suggested_key": {
-        "default": "Ctrl+Shift+Q",
-        "mac": "Command+Shift+Q"
+        "default": "Alt+Shift+Q",
+        "mac": "Alt+Shift+Q"
       },
       "description": "Trigger content capture mode"
     }

@@ -186,12 +186,11 @@ ${markdown}`;
 
 // Get user configuration from storage
 async function getConfig() {
-  const result = await chrome.storage.local.get(['apiKey', 'model', 'userPrompt', 'keyboardShortcut']);
+  const result = await chrome.storage.local.get(['apiKey', 'model', 'userPrompt']);
   return {
     apiKey: result.apiKey || '',
     model: result.model || 'gpt-4o',
-    userPrompt: result.userPrompt || '',
-    keyboardShortcut: result.keyboardShortcut || 'Ctrl+Shift+Q'
+    userPrompt: result.userPrompt || ''
   };
 }
 

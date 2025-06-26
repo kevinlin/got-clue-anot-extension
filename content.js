@@ -71,9 +71,6 @@
   // Initialize modal system
   initializeModal();
   
-  // Initialize keyboard listener
-  initializeKeyboardListener();
-  
   function startSelection() {
     if (isActive) return;
     
@@ -259,74 +256,6 @@
       } catch (error) {
         console.warn('Got Clue Anot: Failed to initialize modal:', error.message);
       }
-    }
-  }
-  
-  function initializeKeyboardListener() {
-    // Add keyboard event listener for custom shortcuts
-    document.addEventListener('keydown', handleKeyboardShortcut, true);
-  }
-  
-  async function handleKeyboardShortcut(event) {
-    // Don't trigger in input fields
-    if (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA' || event.target.isContentEditable) {
-      return;
-    }
-    
-    try {
-      // Get user's preferred keyboard shortcut
-      const result = await chrome.storage.local.get(['keyboardShortcut']);
-      const shortcut = result.keyboardShortcut || 'Ctrl+Shift+Q';
-      
-      // Parse the shortcut
-      const keys = shortcut.split('+');
-      let ctrlRequired = false;
-      let altRequired = false;
-      let shiftRequired = false;
-      let keyRequired = '';
-      
-      keys.forEach(key => {
-        switch(key.toLowerCase()) {
-          case 'ctrl':
-          case 'cmd':
-          case 'command':
-            ctrlRequired = true;
-            break;
-          case 'alt':
-            altRequired = true;
-            break;
-          case 'shift':
-            shiftRequired = true;
-            break;
-          default:
-            keyRequired = key.toLowerCase();
-        }
-      });
-      
-      // Check if the pressed keys match the shortcut
-      const ctrlPressed = event.ctrlKey || event.metaKey; // metaKey for Mac Cmd
-      const altPressed = event.altKey;
-      const shiftPressed = event.shiftKey;
-      const keyPressed = event.key.toLowerCase();
-      
-      if (ctrlPressed === ctrlRequired && 
-          altPressed === altRequired && 
-          shiftPressed === shiftRequired && 
-          keyPressed === keyRequired) {
-        
-        event.preventDefault();
-        event.stopPropagation();
-        
-        // Toggle selection mode
-        if (isActive) {
-          stopSelection();
-        } else {
-          startSelection();
-        }
-      }
-    } catch (error) {
-      // Silently ignore errors in keyboard handling to avoid console spam
-      // This can happen when extension context is invalidated
     }
   }
 })(); 
