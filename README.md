@@ -5,6 +5,9 @@ A Chrome extension that helps users answer multiple-choice questions from online
 ## Features
 
 - **Manual Element Selection**: Click the toolbar button to activate selection mode, then click any element on the page
+- **OCR Text Extraction**: Automatically extracts text from images and videos using Tesseract.js OCR engine
+- **Smart Content Detection**: Automatically detects image, video, and HTML elements and processes them appropriately
+- **Video Frame Capture**: Captures the current frame from videos for text extraction
 - **Keyboard Shortcuts**: Use keyboard shortcuts to quickly trigger content capture (default: `Alt+Shift+Q`)
 - **Visual Feedback**: Hovered elements show a dashed purple border, selected elements show a solid purple border
 - **AI-Powered Answers**: Uses OpenAI's API to analyze questions and provide answers in the format "Answer: X" with explanations
@@ -53,6 +56,8 @@ The extension includes bulb icons in multiple sizes (16x16, 32x32, 48x48, 128x12
    - Hover over elements to see them highlighted with a dashed border
    - Click on the question or section you want to analyze
    - The selected element will show a solid purple border briefly
+   - **For images/videos**: A loading indicator will appear while OCR extracts text
+   - **For regular HTML**: Content is processed immediately
 
 4. **View the Answer**: A modal will appear with the AI's response after processing
 
@@ -63,6 +68,35 @@ The extension includes bulb icons in multiple sizes (16x16, 32x32, 48x48, 128x12
 - **Default Shortcut**: `Alt+Shift+Q` (Option+Shift+Q on Mac)
 - **Customization**: Visit `chrome://extensions/shortcuts` in Chrome to customize the keyboard shortcut
 - **Note**: The shortcut is managed by Chrome's built-in commands system for reliability
+
+## Supported Content Types
+
+The extension can analyze different types of content:
+
+### HTML Elements
+- Regular text content (paragraphs, divs, spans, etc.)
+- Lists and tables
+- Form elements with questions
+- Any HTML element containing text
+
+### Images
+- **IMG tags**: Standard image elements with embedded text
+- **Canvas elements**: Graphics with rendered text content
+- **Background images**: Elements with CSS background images containing text
+- **Supported formats**: Any image format supported by the browser
+
+### Videos
+- **Video elements**: HTML5 video tags
+- **Frame capture**: Automatically captures the current video frame
+- **Text extraction**: Extracts text from the captured frame using OCR
+- **Supported formats**: Any video format supported by the browser
+
+### OCR Processing
+- **Engine**: Uses Tesseract.js for optical character recognition
+- **Languages**: Currently supports English text recognition
+- **Processing time**: 5-10 seconds depending on image complexity
+- **Fallback**: If OCR fails, falls back to HTML content processing
+- **Quality**: Works best with clear, high-contrast text
 
 ## Privacy & Security
 
@@ -80,6 +114,13 @@ The extension includes bulb icons in multiple sizes (16x16, 32x32, 48x48, 128x12
 - Verify you have sufficient OpenAI credits
 - Try refreshing the page and activating selection mode again
 - Check the browser console for any error messages
+
+### OCR Issues
+- OCR processing may take 5-10 seconds for complex images
+- Ensure images have clear, readable text for best results
+- For videos, make sure the video is loaded and displaying content
+- If OCR fails, the extension will fallback to processing the HTML element
+- Check browser console for OCR-specific error messages
 
 ### Modal Not Appearing
 - Check browser console for errors
@@ -116,13 +157,15 @@ got-clue-anot-extension/
 ├── modal.js               # Modal display system
 ├── options.html           # Settings page
 ├── options.js             # Settings page logic
+├── test-ocr.html          # Test page for OCR functionality
 ├── icons/                 # Extension icons
 │   ├── bulb-16.png        # 16x16 toolbar icon
 │   ├── bulb-32.png        # 32x32 icon
 │   ├── bulb-48.png        # 48x48 icon
 │   └── bulb-128.png       # 128x128 icon
 └── utils/
-    └── markdown.js        # HTML to markdown conversion utilities
+    ├── markdown.js        # HTML to markdown conversion utilities
+    └── ocr.js             # OCR text extraction using Tesseract.js
 ```
 
 ### Key Components
@@ -132,11 +175,14 @@ got-clue-anot-extension/
   - Handles element selection with visual feedback overlays
   - Provides crosshair cursor during selection mode
   - Robust event handling with context validation
+  - Smart detection of image, video, and HTML elements
+  - Loading indicators for OCR processing
 - **Background Script**: 
   - Manages OpenAI API calls with proper error handling
   - Handles configuration management
   - Chrome commands API integration for keyboard shortcuts
   - Coordinates between content script and options
+  - Processes both OCR-extracted text and HTML content
 - **Modal System**: 
   - Non-blocking overlay for displaying responses
   - Auto-dismiss functionality (10 seconds)
@@ -150,6 +196,9 @@ got-clue-anot-extension/
 
 ### Technical Features
 
+- **OCR Text Extraction**: Tesseract.js integration for extracting text from images and videos
+- **Smart Content Processing**: Automatically detects element types and applies appropriate processing
+- **Video Frame Capture**: Canvas-based frame capture from video elements for OCR analysis
 - **HTML to Text Conversion**: Simplified conversion that extracts clean text from selected HTML
 - **System Prompt**: Built-in prompt engineering for consistent answer formatting
 - **User Prompt Integration**: Optional custom prompts that integrate with system instructions
@@ -157,6 +206,16 @@ got-clue-anot-extension/
 - **Extension Context Validation**: Prevents errors during extension updates/reloads
 - **Graceful Error Handling**: User-friendly error messages and recovery
 - **Auto-Configuration Flow**: Guides users through setup process
+
+### Testing
+
+The extension includes a test page (`test-ocr.html`) for verifying OCR functionality:
+
+- **Canvas elements**: With programmatically drawn text for OCR testing
+- **Sample quiz questions**: Rendered as images to test real-world scenarios
+- **Video elements**: For testing video frame capture
+- **Regular HTML content**: For comparison with standard processing
+- **Instructions**: Step-by-step guide for testing different content types
 
 ### API Integration
 
