@@ -55,6 +55,7 @@
             <li>Try selecting different elements below</li>
             <li>For images/videos: The extension should extract text using OCR</li>
             <li>For regular HTML: The extension should process the HTML content normally</li>
+            <li><strong>Best test:</strong> Try the quiz question images below - they contain real exam questions perfect for OCR testing</li>
         </ol>
     </div>
 
@@ -65,10 +66,50 @@
         <!-- Canvas with text drawn on it -->
         <canvas id="textCanvas" class="test-image" width="400" height="200"></canvas>
         
-        <!-- You can add more test images here -->
         <div class="quiz-text">
             <strong>Note:</strong> The canvas above contains sample quiz text drawn programmatically. 
             Select it to test OCR extraction.
+        </div>
+        
+        <!-- Real quiz question images -->
+        <h3>📚 Quiz Question Images</h3>
+        <p>These are actual quiz question images - perfect for testing OCR text extraction:</p>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin: 20px 0;">
+            <div>
+                <img src="Question-01.png" alt="Quiz Question 1" class="test-image" style="width: 100%; max-width: 400px;">
+                <div class="quiz-text">
+                    <strong>Question 1:</strong> Select this image to extract the quiz question text via OCR.
+                </div>
+            </div>
+            
+            <div>
+                <img src="Question-02.png" alt="Quiz Question 2" class="test-image" style="width: 100%; max-width: 400px;">
+                <div class="quiz-text">
+                    <strong>Question 2:</strong> Another quiz question image for OCR testing.
+                </div>
+            </div>
+            
+            <div>
+                <img src="Question-03.png" alt="Quiz Question 3" class="test-image" style="width: 100%; max-width: 400px;">
+                <div class="quiz-text">
+                    <strong>Question 3:</strong> Test OCR accuracy with this question image.
+                </div>
+            </div>
+            
+            <div>
+                <img src="Question-04.png" alt="Quiz Question 4" class="test-image" style="width: 100%; max-width: 400px;">
+                <div class="quiz-text">
+                    <strong>Question 4:</strong> Complex question layout for advanced OCR testing.
+                </div>
+            </div>
+            
+            <div>
+                <img src="Question-05.png" alt="Quiz Question 5" class="test-image" style="width: 100%; max-width: 400px;">
+                <div class="quiz-text">
+                    <strong>Question 5:</strong> Final quiz question image for comprehensive testing.
+                </div>
+            </div>
         </div>
     </div>
 
@@ -124,10 +165,11 @@
         
         ctx1.fillStyle = '#000000';
         ctx1.font = '16px Arial';
-        ctx1.fillText('Sample Text for OCR Testing', 20, 40);
-        ctx1.fillText('This text should be extracted', 20, 70);
-        ctx1.fillText('by the Tesseract.js OCR engine', 20, 100);
-        ctx1.fillText('when you select this canvas.', 20, 130);
+        ctx1.fillText('Capital of France', 20, 40);
+        ctx1.fillText('A) London', 20, 70);
+        ctx1.fillText('B) Berlin', 20, 100);
+        ctx1.fillText('C) Paris', 20, 130);
+        ctx1.fillText('D) Madrid', 20, 160);
         
         // Draw a quiz question on the second canvas
         const canvas2 = document.getElementById('quizCanvas');
