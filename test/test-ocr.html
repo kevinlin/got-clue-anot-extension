@@ -3,197 +3,300 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OCR Test Page - Got Clue Anot Extension</title>
+    <title>OCR Test - Fixed Version</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
-            line-height: 1.6;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
         }
         .test-section {
-            margin: 30px 0;
-            padding: 20px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
+            margin: 20px 0;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+        }
+        .test-section h2 {
+            color: #666;
+            margin-top: 0;
         }
         .test-image {
             max-width: 100%;
             height: auto;
-            border: 2px solid #ccc;
-            margin: 10px 0;
-        }
-        .test-video {
-            max-width: 100%;
-            height: auto;
-            border: 2px solid #ccc;
+            border: 1px solid #ccc;
             margin: 10px 0;
         }
         .instructions {
-            background-color: #f0f8ff;
+            background-color: #e8f4f8;
             padding: 15px;
             border-radius: 5px;
-            margin-bottom: 20px;
+            margin: 20px 0;
         }
-        .quiz-text {
-            background-color: #f9f9f9;
-            padding: 15px;
-            border-radius: 5px;
+        .status {
+            padding: 10px;
             margin: 10px 0;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .status.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .status.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .status.info {
+            background-color: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        .debug-info {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 12px;
+            margin: 10px 0;
+            white-space: pre-wrap;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        button:disabled {
+            background-color: #6c757d;
+            cursor: not-allowed;
         }
     </style>
 </head>
 <body>
-    <h1>OCR Test Page for Got Clue Anot Extension</h1>
-    
-    <div class="instructions">
-        <h2>📋 Instructions</h2>
-        <p>This page is designed to test the OCR functionality of the Got Clue Anot extension:</p>
-        <ol>
-            <li>Activate the extension (click the bulb icon or use Alt+Shift+Q)</li>
-            <li>Try selecting different elements below</li>
-            <li>For images/videos: The extension should extract text using OCR</li>
-            <li>For regular HTML: The extension should process the HTML content normally</li>
-            <li><strong>Best test:</strong> Try the quiz question images below - they contain real exam questions perfect for OCR testing</li>
-        </ol>
-    </div>
-
-    <div class="test-section">
-        <h2>🖼️ Test Images with Text</h2>
-        <p>Try selecting these images - they contain text that should be extracted via OCR:</p>
+    <div class="container">
+        <h1>🔍 OCR Test - Fixed Version</h1>
         
-        <!-- Canvas with text drawn on it -->
-        <canvas id="textCanvas" class="test-image" width="400" height="200"></canvas>
-        
-        <div class="quiz-text">
-            <strong>Note:</strong> The canvas above contains sample quiz text drawn programmatically. 
-            Select it to test OCR extraction.
+        <div class="instructions">
+            <h3>Instructions:</h3>
+            <ol>
+                <li>Load the Got Clue Anot extension in Chrome</li>
+                <li>Click the extension icon or press Alt+Shift+Q to enter selection mode</li>
+                <li>Click on any of the test images below</li>
+                <li>The extension should extract text using the improved OCR system</li>
+                <li>Check the console for detailed logging information</li>
+            </ol>
         </div>
-        
-        <!-- Real quiz question images -->
-        <h3>📚 Quiz Question Images</h3>
-        <p>These are actual quiz question images - perfect for testing OCR text extraction:</p>
-        
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin: 20px 0;">
-            <div>
-                <img src="Question-01.png" alt="Quiz Question 1" class="test-image" style="width: 100%; max-width: 400px;">
-                <div class="quiz-text">
-                    <strong>Question 1:</strong> Select this image to extract the quiz question text via OCR.
-                </div>
-            </div>
-            
-            <div>
-                <img src="Question-02.png" alt="Quiz Question 2" class="test-image" style="width: 100%; max-width: 400px;">
-                <div class="quiz-text">
-                    <strong>Question 2:</strong> Another quiz question image for OCR testing.
-                </div>
-            </div>
-            
-            <div>
-                <img src="Question-03.png" alt="Quiz Question 3" class="test-image" style="width: 100%; max-width: 400px;">
-                <div class="quiz-text">
-                    <strong>Question 3:</strong> Test OCR accuracy with this question image.
-                </div>
-            </div>
-            
-            <div>
-                <img src="Question-04.png" alt="Quiz Question 4" class="test-image" style="width: 100%; max-width: 400px;">
-                <div class="quiz-text">
-                    <strong>Question 4:</strong> Complex question layout for advanced OCR testing.
-                </div>
-            </div>
-            
-            <div>
-                <img src="Question-05.png" alt="Quiz Question 5" class="test-image" style="width: 100%; max-width: 400px;">
-                <div class="quiz-text">
-                    <strong>Question 5:</strong> Final quiz question image for comprehensive testing.
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <div class="test-section">
-        <h2>🎥 Test Video</h2>
-        <p>Try selecting this video - the extension should capture the current frame and extract text:</p>
-        
-        <!-- Simple video element -->
-        <video id="testVideo" class="test-video" width="400" height="300" controls>
-            <source src="data:video/mp4;base64,AAAAHGZ0eXBtcDQyAAAAAG1wNDJpc29tYXZjMQAAAAhmcmVlAAAAGW1kYXQAAAKuAAACoAAACo" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-        
-        <div class="quiz-text">
-            <strong>Note:</strong> This is a minimal video element. In a real scenario, you would select 
-            a video containing text (like educational videos, quiz screenshots, etc.).
+        <div id="status" class="status info">
+            Status: Ready for testing
         </div>
-    </div>
 
-    <div class="test-section">
-        <h2>📝 Regular HTML Content</h2>
-        <p>Try selecting this regular HTML content - it should be processed normally:</p>
-        
-        <div class="quiz-text">
-            <h3>Sample Quiz Question</h3>
-            <p><strong>Question:</strong> What is the capital of France?</p>
-            <p><strong>A)</strong> London</p>
-            <p><strong>B)</strong> Berlin</p>
-            <p><strong>C)</strong> Paris</p>
-            <p><strong>D)</strong> Madrid</p>
+        <div class="test-section">
+            <h2>Test 1: Simple Question Image</h2>
+            <p>This image contains a simple multiple choice question:</p>
+            <img src="Question-01.png" alt="Question 1" class="test-image" id="test-img-1">
         </div>
-    </div>
 
-    <div class="test-section">
-        <h2>🎨 Canvas with Quiz Content</h2>
-        <p>Try selecting this canvas with quiz content drawn on it:</p>
-        
-        <canvas id="quizCanvas" class="test-image" width="500" height="300"></canvas>
-        
-        <div class="quiz-text">
-            <strong>Note:</strong> This canvas contains a sample multiple-choice question. 
-            The OCR should extract the text from the canvas.
+        <div class="test-section">
+            <h2>Test 2: Complex Question Image</h2>
+            <p>This image contains a more complex question with formatting:</p>
+            <img src="Question-02.png" alt="Question 2" class="test-image" id="test-img-2">
+        </div>
+
+        <div class="test-section">
+            <h2>Test 3: Mathematical Question</h2>
+            <p>This image contains a mathematical question:</p>
+            <img src="Question-03.png" alt="Question 3" class="test-image" id="test-img-3">
+        </div>
+
+        <div class="test-section">
+            <h2>Test 4: Text-Heavy Question</h2>
+            <p>This image contains a question with a lot of text:</p>
+            <img src="Question-04.png" alt="Question 4" class="test-image" id="test-img-4">
+        </div>
+
+        <div class="test-section">
+            <h2>Test 5: Diagram Question</h2>
+            <p>This image contains a question with a diagram:</p>
+            <img src="Question-05.png" alt="Question 5" class="test-image" id="test-img-5">
+        </div>
+
+        <div class="test-section">
+            <h2>Manual OCR Test</h2>
+            <p>Click the button below to test OCR directly (without extension):</p>
+            <button id="manual-test-btn">Test OCR Directly</button>
+            <div id="manual-test-result" class="debug-info" style="display: none;"></div>
+        </div>
+
+        <div class="test-section">
+            <h2>Debug Information</h2>
+            <button id="debug-btn">Show Debug Info</button>
+            <div id="debug-info" class="debug-info" style="display: none;"></div>
         </div>
     </div>
 
     <script>
-        // Draw text on the first canvas
-        const canvas1 = document.getElementById('textCanvas');
-        const ctx1 = canvas1.getContext('2d');
+        // Test OCR functionality directly
+        document.getElementById('manual-test-btn').addEventListener('click', async function() {
+            const btn = this;
+            const resultDiv = document.getElementById('manual-test-result');
+            
+            btn.disabled = true;
+            btn.textContent = 'Loading OCR...';
+            resultDiv.style.display = 'block';
+            resultDiv.textContent = 'Loading Tesseract.js...';
+            
+            try {
+                // Load Tesseract.js
+                if (typeof Tesseract === 'undefined') {
+                    const script = document.createElement('script');
+                    script.src = 'https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js';
+                    document.head.appendChild(script);
+                    
+                    await new Promise((resolve, reject) => {
+                        script.onload = resolve;
+                        script.onerror = reject;
+                    });
+                    
+                    // Wait for initialization
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+                }
+                
+                resultDiv.textContent = 'Creating OCR worker...';
+                
+                // Test with first image
+                const img = document.getElementById('test-img-1');
+                const worker = await Tesseract.createWorker('eng', 1, {
+                    logger: (m) => {
+                        if (m.status === 'recognizing text') {
+                            resultDiv.textContent = `OCR Progress: ${Math.round(m.progress * 100)}%`;
+                        }
+                    }
+                });
+                
+                resultDiv.textContent = 'Running OCR on test image...';
+                
+                const result = await worker.recognize(img);
+                
+                resultDiv.textContent = `OCR Result:\n${result.data.text}`;
+                
+                await worker.terminate();
+                
+                btn.textContent = 'Test OCR Directly';
+                btn.disabled = false;
+                
+            } catch (error) {
+                resultDiv.textContent = `OCR Error: ${error.message}`;
+                btn.textContent = 'Test OCR Directly';
+                btn.disabled = false;
+            }
+        });
         
-        ctx1.fillStyle = '#ffffff';
-        ctx1.fillRect(0, 0, canvas1.width, canvas1.height);
+        // Debug information
+        document.getElementById('debug-btn').addEventListener('click', function() {
+            const debugDiv = document.getElementById('debug-info');
+            
+            if (debugDiv.style.display === 'none') {
+                debugDiv.style.display = 'block';
+                this.textContent = 'Hide Debug Info';
+                
+                const debugInfo = {
+                    'User Agent': navigator.userAgent,
+                    'Extension Available': typeof chrome !== 'undefined' && chrome.runtime,
+                    'Tesseract Available': typeof Tesseract !== 'undefined',
+                    'Got Clue OCR': typeof window.gotClueOCR !== 'undefined',
+                    'Got Clue Selection': typeof window.gotClueSelection !== 'undefined',
+                    'Got Clue Modal': typeof window.gotClueModal !== 'undefined',
+                    'Window Properties': Object.keys(window).filter(k => k.includes('gotClue')),
+                    'Console Errors': 'Check browser console for detailed error messages'
+                };
+                
+                debugDiv.textContent = JSON.stringify(debugInfo, null, 2);
+            } else {
+                debugDiv.style.display = 'none';
+                this.textContent = 'Show Debug Info';
+            }
+        });
         
-        ctx1.fillStyle = '#000000';
-        ctx1.font = '16px Arial';
-        ctx1.fillText('Capital of France', 20, 40);
-        ctx1.fillText('A) London', 20, 70);
-        ctx1.fillText('B) Berlin', 20, 100);
-        ctx1.fillText('C) Paris', 20, 130);
-        ctx1.fillText('D) Madrid', 20, 160);
+        // Monitor extension status
+        function updateStatus(message, type = 'info') {
+            const statusDiv = document.getElementById('status');
+            statusDiv.textContent = `Status: ${message}`;
+            statusDiv.className = `status ${type}`;
+        }
         
-        // Draw a quiz question on the second canvas
-        const canvas2 = document.getElementById('quizCanvas');
-        const ctx2 = canvas2.getContext('2d');
+        // Check if extension is loaded
+        if (typeof chrome !== 'undefined' && chrome.runtime) {
+            updateStatus('Extension context available', 'success');
+        } else {
+            updateStatus('Extension context not available - load as extension', 'error');
+        }
         
-        ctx2.fillStyle = '#f8f9fa';
-        ctx2.fillRect(0, 0, canvas2.width, canvas2.height);
+        // Monitor for extension injection
+        let checkCount = 0;
+        const checkExtension = () => {
+            checkCount++;
+            
+            if (window.gotClueSelection) {
+                updateStatus('Extension loaded successfully - ready for testing!', 'success');
+                return;
+            }
+            
+            if (checkCount < 50) {
+                setTimeout(checkExtension, 100);
+            } else {
+                updateStatus('Extension not detected after 5 seconds', 'error');
+            }
+        };
         
-        ctx2.fillStyle = '#000000';
-        ctx2.font = 'bold 18px Arial';
-        ctx2.fillText('Quiz Question:', 20, 40);
+        setTimeout(checkExtension, 500);
         
-        ctx2.font = '16px Arial';
-        ctx2.fillText('What is the largest planet in our solar system?', 20, 70);
+        // Log all console messages for debugging
+        const originalLog = console.log;
+        const originalError = console.error;
+        const originalWarn = console.warn;
         
-        ctx2.fillText('A) Earth', 20, 110);
-        ctx2.fillText('B) Jupiter', 20, 140);
-        ctx2.fillText('C) Saturn', 20, 170);
-        ctx2.fillText('D) Mars', 20, 200);
+        console.log = function(...args) {
+            if (args[0] && args[0].includes('Got Clue Anot')) {
+                updateStatus(`Log: ${args.join(' ')}`, 'info');
+            }
+            originalLog.apply(console, args);
+        };
         
-        // Add a border
-        ctx2.strokeStyle = '#dee2e6';
-        ctx2.lineWidth = 2;
-        ctx2.strokeRect(10, 10, canvas2.width - 20, canvas2.height - 20);
+        console.error = function(...args) {
+            if (args[0] && args[0].includes('Got Clue Anot')) {
+                updateStatus(`Error: ${args.join(' ')}`, 'error');
+            }
+            originalError.apply(console, args);
+        };
+        
+        console.warn = function(...args) {
+            if (args[0] && args[0].includes('Got Clue Anot')) {
+                updateStatus(`Warning: ${args.join(' ')}`, 'error');
+            }
+            originalWarn.apply(console, args);
+        };
     </script>
 </body>
 </html> 

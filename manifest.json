@@ -40,5 +40,12 @@
       "resources": ["icons/bulb-128.png", "modal.js", "utils/ocr.js"],
       "matches": ["<all_urls>"]
     }
+  ],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_end"
+    }
   ]
 } 

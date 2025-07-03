@@ -62,7 +62,14 @@ async function toggleSelectionMode(tab) {
     
     // Inject content script and start selection if entering selection mode
     if (isSelectionMode) {
-      // First inject the content script
+      // First inject the OCR script into the main world
+      await chrome.scripting.executeScript({
+        target: { tabId: tab.id },
+        files: ['utils/ocr.js'],
+        world: 'MAIN'
+      });
+      
+      // Then inject the content script
       await chrome.scripting.executeScript({
         target: { tabId: tab.id },
         files: ['content.js']
