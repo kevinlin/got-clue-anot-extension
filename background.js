@@ -172,6 +172,8 @@ async function processSelectedElement(messageData, tabId) {
       throw new Error('No text content could be extracted from the selected element');
     }
     
+    console.log('Got Clue Anot: Processing content:', contentText.substring(0, 100) + '...');
+    
     // Construct final prompt
     const systemPrompt = `You are the user’s best buddy, here to help with quiz questions.
 Rules
