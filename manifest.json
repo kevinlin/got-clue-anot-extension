@@ -37,7 +37,7 @@
   },
   "web_accessible_resources": [
     {
-      "resources": ["icons/bulb-128.png", "modal.js"],
+      "resources": ["icons/bulb-128.png", "modal.js", "utils/ocr.js"],
       "matches": ["<all_urls>"]
     }
   ]

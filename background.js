@@ -121,7 +121,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     updateIcon(false);
     
     // Process the selected element
-    processSelectedElement(message.html, sender.tab.id);
+    processSelectedElement(message, sender.tab.id);
     
     // Send acknowledgment response
     sendResponse({ success: true });
@@ -136,7 +136,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 
 // Process selected element and call OpenAI
-async function processSelectedElement(html, tabId) {
+async function processSelectedElement(messageData, tabId) {
   try {
     // Get user configuration
     const config = await getConfig();
@@ -146,8 +146,31 @@ async function processSelectedElement(html, tabId) {
       return;
     }
     
-    // Convert HTML to markdown
-    const markdown = await convertToMarkdown(html);
+    let contentText = '';
+    let processingNote = '';
+    
+    // Handle different types of content
+    if (messageData.extractedText) {
+      // Use OCR extracted text
+      contentText = messageData.extractedText;
+      processingNote = `Text extracted from ${messageData.elementType}: `;
+      
+      // Show any OCR errors as warnings
+      if (messageData.error) {
+        console.warn('Got Clue Anot: OCR warning:', messageData.error);
+      }
+    } else if (messageData.html) {
+      // Convert HTML to markdown for regular elements
+      contentText = await convertToMarkdown(messageData.html);
+      processingNote = 'Content from HTML element: ';
+    } else {
+      throw new Error('No content to process');
+    }
+    
+    // Validate that we have meaningful content
+    if (!contentText || contentText.trim().length === 0) {
+      throw new Error('No text content could be extracted from the selected element');
+    }
     
     // Construct final prompt
     const systemPrompt = `You are the user’s best buddy, here to help with quiz questions.
@@ -169,7 +192,7 @@ Rules
     
     const finalPrompt = `${systemPrompt}\n\n${userPromptSection}
 Below is the question and options:
-${markdown}`;
+${contentText}`;
     console.log(`Prompt to OpenAI: ${finalPrompt}`);
     
     // Call OpenAI API

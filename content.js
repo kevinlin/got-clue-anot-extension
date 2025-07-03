@@ -71,6 +71,9 @@
   // Initialize modal system
   initializeModal();
   
+  // Initialize OCR system
+  initializeOCR();
+  
   function startSelection() {
     if (isActive) return;
     
@@ -135,7 +138,7 @@
     clearHover();
   }
   
-  function handleClick(event) {
+  async function handleClick(event) {
     if (!isActive) return;
     
     event.preventDefault();
@@ -146,21 +149,65 @@
     selectedElement = event.target;
     showSelectionOverlay(selectedElement);
     
-    // Extract element content
-    const html = selectedElement.outerHTML;
-    
-    // Stop selection mode
+    // Stop selection mode first
     stopSelection();
     
-    // Send to background script (with error handling)
-    safeSendMessage({
-      type: 'ELEMENT_SELECTED',
-      html: html
-    }, (response) => {
-      if (response && response.success) {
-        console.log('Got Clue Anot: Element selection processed successfully');
+    try {
+      // Check if element is image or video
+      if (window.gotClueOCR && (window.gotClueOCR.isImageElement(selectedElement) || window.gotClueOCR.isVideoElement(selectedElement))) {
+        // Show loading indicator
+        showLoadingModal();
+        
+        // Extract text using OCR
+        const extractedText = await window.gotClueOCR.extractText(selectedElement);
+        
+        // Hide loading indicator
+        hideLoadingModal();
+        
+        // Send extracted text to background script
+        safeSendMessage({
+          type: 'ELEMENT_SELECTED',
+          html: null,
+          extractedText: extractedText,
+          elementType: selectedElement.tagName.toLowerCase()
+        }, (response) => {
+          if (response && response.success) {
+            console.log('Got Clue Anot: OCR text extraction processed successfully');
+          }
+        });
+      } else {
+        // Regular HTML element - extract HTML content
+        const html = selectedElement.outerHTML;
+        
+        // Send to background script (with error handling)
+        safeSendMessage({
+          type: 'ELEMENT_SELECTED',
+          html: html,
+          extractedText: null,
+          elementType: 'html'
+        }, (response) => {
+          if (response && response.success) {
+            console.log('Got Clue Anot: Element selection processed successfully');
+          }
+        });
       }
-    });
+    } catch (error) {
+      console.error('Got Clue Anot: Error processing selected element:', error);
+      hideLoadingModal();
+      
+      // Show error and fallback to HTML extraction
+      safeSendMessage({
+        type: 'ELEMENT_SELECTED',
+        html: selectedElement.outerHTML,
+        extractedText: null,
+        elementType: 'html',
+        error: error.message
+      }, (response) => {
+        if (response && response.success) {
+          console.log('Got Clue Anot: Fallback to HTML processing');
+        }
+      });
+    }
   }
   
   function createOverlay(styles) {
@@ -256,6 +303,70 @@
       } catch (error) {
         console.warn('Got Clue Anot: Failed to initialize modal:', error.message);
       }
+    }
+  }
+  
+  function initializeOCR() {
+    // Check if extension context is valid before trying to load OCR
+    if (!isExtensionContextValid()) {
+      console.warn('Got Clue Anot: Extension context invalidated, cannot initialize OCR');
+      return;
+    }
+    
+    // OCR system will be initialized by ocr.js
+    if (!window.gotClueOCR) {
+      try {
+        // Load OCR system
+        const script = document.createElement('script');
+        script.src = chrome.runtime.getURL('utils/ocr.js');
+        script.onload = function() {
+          console.log('OCR system loaded');
+        };
+        script.onerror = function() {
+          console.warn('Got Clue Anot: Failed to load OCR system - extension context may be invalidated');
+        };
+        (document.head || document.documentElement).appendChild(script);
+      } catch (error) {
+        console.warn('Got Clue Anot: Failed to initialize OCR:', error.message);
+      }
+    }
+  }
+  
+  // Loading modal functions
+  let loadingModal = null;
+  
+  function showLoadingModal() {
+    if (loadingModal) return;
+    
+    loadingModal = document.createElement('div');
+    loadingModal.style.cssText = `
+      position: fixed !important;
+      top: 50% !important;
+      left: 50% !important;
+      transform: translate(-50%, -50%) !important;
+      background: rgba(0, 0, 0, 0.8) !important;
+      color: white !important;
+      padding: 20px !important;
+      border-radius: 8px !important;
+      z-index: 1000000 !important;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+      font-size: 16px !important;
+      text-align: center !important;
+      min-width: 200px !important;
+    `;
+    
+    loadingModal.innerHTML = `
+      <div style="margin-bottom: 10px;">🔍 Extracting text...</div>
+      <div style="font-size: 12px; opacity: 0.7;">This may take a few seconds</div>
+    `;
+    
+    document.body.appendChild(loadingModal);
+  }
+  
+  function hideLoadingModal() {
+    if (loadingModal) {
+      loadingModal.remove();
+      loadingModal = null;
     }
   }
 })(); 

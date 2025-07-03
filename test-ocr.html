@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OCR Test Page - Got Clue Anot Extension</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .test-section {
+            margin: 30px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        .test-image {
+            max-width: 100%;
+            height: auto;
+            border: 2px solid #ccc;
+            margin: 10px 0;
+        }
+        .test-video {
+            max-width: 100%;
+            height: auto;
+            border: 2px solid #ccc;
+            margin: 10px 0;
+        }
+        .instructions {
+            background-color: #f0f8ff;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .quiz-text {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>OCR Test Page for Got Clue Anot Extension</h1>
+    
+    <div class="instructions">
+        <h2>📋 Instructions</h2>
+        <p>This page is designed to test the OCR functionality of the Got Clue Anot extension:</p>
+        <ol>
+            <li>Activate the extension (click the bulb icon or use Alt+Shift+Q)</li>
+            <li>Try selecting different elements below</li>
+            <li>For images/videos: The extension should extract text using OCR</li>
+            <li>For regular HTML: The extension should process the HTML content normally</li>
+        </ol>
+    </div>
+
+    <div class="test-section">
+        <h2>🖼️ Test Images with Text</h2>
+        <p>Try selecting these images - they contain text that should be extracted via OCR:</p>
+        
+        <!-- Canvas with text drawn on it -->
+        <canvas id="textCanvas" class="test-image" width="400" height="200"></canvas>
+        
+        <!-- You can add more test images here -->
+        <div class="quiz-text">
+            <strong>Note:</strong> The canvas above contains sample quiz text drawn programmatically. 
+            Select it to test OCR extraction.
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2>🎥 Test Video</h2>
+        <p>Try selecting this video - the extension should capture the current frame and extract text:</p>
+        
+        <!-- Simple video element -->
+        <video id="testVideo" class="test-video" width="400" height="300" controls>
+            <source src="data:video/mp4;base64,AAAAHGZ0eXBtcDQyAAAAAG1wNDJpc29tYXZjMQAAAAhmcmVlAAAAGW1kYXQAAAKuAAACoAAACo" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        
+        <div class="quiz-text">
+            <strong>Note:</strong> This is a minimal video element. In a real scenario, you would select 
+            a video containing text (like educational videos, quiz screenshots, etc.).
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2>📝 Regular HTML Content</h2>
+        <p>Try selecting this regular HTML content - it should be processed normally:</p>
+        
+        <div class="quiz-text">
+            <h3>Sample Quiz Question</h3>
+            <p><strong>Question:</strong> What is the capital of France?</p>
+            <p><strong>A)</strong> London</p>
+            <p><strong>B)</strong> Berlin</p>
+            <p><strong>C)</strong> Paris</p>
+            <p><strong>D)</strong> Madrid</p>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2>🎨 Canvas with Quiz Content</h2>
+        <p>Try selecting this canvas with quiz content drawn on it:</p>
+        
+        <canvas id="quizCanvas" class="test-image" width="500" height="300"></canvas>
+        
+        <div class="quiz-text">
+            <strong>Note:</strong> This canvas contains a sample multiple-choice question. 
+            The OCR should extract the text from the canvas.
+        </div>
+    </div>
+
+    <script>
+        // Draw text on the first canvas
+        const canvas1 = document.getElementById('textCanvas');
+        const ctx1 = canvas1.getContext('2d');
+        
+        ctx1.fillStyle = '#ffffff';
+        ctx1.fillRect(0, 0, canvas1.width, canvas1.height);
+        
+        ctx1.fillStyle = '#000000';
+        ctx1.font = '16px Arial';
+        ctx1.fillText('Sample Text for OCR Testing', 20, 40);
+        ctx1.fillText('This text should be extracted', 20, 70);
+        ctx1.fillText('by the Tesseract.js OCR engine', 20, 100);
+        ctx1.fillText('when you select this canvas.', 20, 130);
+        
+        // Draw a quiz question on the second canvas
+        const canvas2 = document.getElementById('quizCanvas');
+        const ctx2 = canvas2.getContext('2d');
+        
+        ctx2.fillStyle = '#f8f9fa';
+        ctx2.fillRect(0, 0, canvas2.width, canvas2.height);
+        
+        ctx2.fillStyle = '#000000';
+        ctx2.font = 'bold 18px Arial';
+        ctx2.fillText('Quiz Question:', 20, 40);
+        
+        ctx2.font = '16px Arial';
+        ctx2.fillText('What is the largest planet in our solar system?', 20, 70);
+        
+        ctx2.fillText('A) Earth', 20, 110);
+        ctx2.fillText('B) Jupiter', 20, 140);
+        ctx2.fillText('C) Saturn', 20, 170);
+        ctx2.fillText('D) Mars', 20, 200);
+        
+        // Add a border
+        ctx2.strokeStyle = '#dee2e6';
+        ctx2.lineWidth = 2;
+        ctx2.strokeRect(10, 10, canvas2.width - 20, canvas2.height - 20);
+    </script>
+</body>
+</html> 
