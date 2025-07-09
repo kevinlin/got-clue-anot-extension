@@ -171,7 +171,7 @@
                 // Load Tesseract.js
                 if (typeof Tesseract === 'undefined') {
                     const script = document.createElement('script');
-                    script.src = 'https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js';
+                    script.src = '../libs/tesseract.min.js';
                     document.head.appendChild(script);
                     
                     await new Promise((resolve, reject) => {

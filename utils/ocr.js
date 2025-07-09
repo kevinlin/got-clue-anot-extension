@@ -5,7 +5,8 @@
   'use strict';
 
   // Tesseract.js configuration - using a stable version
-  const TESSERACT_CDN = 'https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js';
+  // Use a bundled copy of Tesseract.js to comply with Chrome Web Store policies
+  const TESSERACT_LOCAL = chrome.runtime.getURL('libs/tesseract.min.js');
   let tesseractLoaded = false;
   let tesseractWorker = null;
   let isInitializing = false;
@@ -31,9 +32,9 @@
     isInitializing = true;
 
     try {
-      // Load Tesseract.js from CDN if not already loaded
+      // Load Tesseract.js from bundled file if not already loaded
       if (typeof Tesseract === 'undefined') {
-        await loadScript(TESSERACT_CDN);
+        await loadScript(TESSERACT_LOCAL);
         
         // Wait a bit for the script to fully initialize
         await new Promise(resolve => setTimeout(resolve, 500));

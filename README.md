@@ -228,7 +228,8 @@ The extension includes a test page (`test-ocr.html`) for verifying OCR functiona
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
+It also bundles [Tesseract.js](https://github.com/naptha/tesseract.js) which is
+licensed under the Apache 2.0 License (see `libs/TESSERACT_LICENSE.md`).
 
 ## Disclaimer
-
 This extension is for educational purposes. Please ensure you comply with your institution's academic integrity policies when using this tool. 
