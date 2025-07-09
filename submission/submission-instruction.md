@@ -35,7 +35,7 @@ From the extension root folder, select all contents (not the folder itself) and 
 - **Terminal method**:
 
   ```bash
-  zip -r got-clue-anot.zip . -x "*.DS_Store" -x ".history/*" -x ".git/*"
+  zip -r got-clue-anot.zip . -x "*.DS_Store" -x ".history/*" -x ".git/*" -x "test/*"
   ```
 
 ## Step 2: Set up developer account
