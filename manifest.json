@@ -37,7 +37,7 @@
   },
   "web_accessible_resources": [
     {
-      "resources": ["icons/bulb-128.png", "modal.js", "utils/ocr.js"],
+      "resources": ["icons/bulb-128.png", "modal.js", "utils/ocr.js", "libs/tesseract.min.js"],
       "matches": ["<all_urls>"]
     }
   ],
@@ -47,5 +47,4 @@
       "js": ["content.js"],
       "run_at": "document_end"
     }
-  ]
-} 
+  ]} 
